@@ -1,2 +1,2 @@
-# qa
-Question and answer site
+# Question and answer site
+
