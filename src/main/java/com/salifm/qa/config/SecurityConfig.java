@@ -36,15 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 csrf().disable().
                 authorizeRequests().
-                antMatchers("/login", "/register").anonymous().
-                antMatchers("/").permitAll().
+                antMatchers("/login", "/register", "/").permitAll().
+                antMatchers("/questions/*").authenticated().
                 and().formLogin().
                     loginPage("/login").
                     usernameParameter("username").
                     passwordParameter("password").
                     defaultSuccessUrl("/questions").
-                and().logout().permitAll().logoutSuccessUrl("/").
-                and().exceptionHandling().accessDeniedPage("/unauthorized");
+                and().logout().permitAll().logoutSuccessUrl("/");
 
     }
 }

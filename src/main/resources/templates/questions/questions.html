@@ -9,6 +9,14 @@
 <body>
 <main class="container">
     <div th:replace="fragments/navbar :: logged"></div>
+    <h3 class="pb-2 mt-4 mb-2 border-bottom">
+        Questions
+    </h3>
+    <div class="list-group">
+        <a th:each="q : ${questions}" th:object="${q}" th:href="@{'/question/' + ${q.id}}" class="list-group-item list-group-item-action">
+            <span th:text="${q.title}"></span>
+        </a>
+    </div>
 </main>
 </body>
 </html>

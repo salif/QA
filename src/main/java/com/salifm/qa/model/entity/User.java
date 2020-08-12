@@ -64,7 +64,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Column(name="account_non_expired", columnDefinition="tinyint(1) default 1")
+    @Column(columnDefinition="tinyint(1) default 1")
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
@@ -74,7 +74,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Column(name="account_non_locked", columnDefinition="tinyint(1) default 1")
+    @Column(columnDefinition="tinyint(1) default 1")
     public boolean isAccountNonLocked() {
         return this.accountNonLocked;
     }
@@ -84,7 +84,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Column(name="credentials_non_expired", columnDefinition="tinyint(1) default 1")
+    @Column(columnDefinition="tinyint(1) default 1")
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -94,7 +94,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Column(name="enabled", columnDefinition="tinyint(1) default 1")
+    @Column(columnDefinition="tinyint(1) default 1")
     public boolean isEnabled() {
         return enabled;
     }

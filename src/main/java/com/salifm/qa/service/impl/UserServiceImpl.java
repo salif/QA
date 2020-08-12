@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(this.passwordEncoder.encode(password));
-        user.setAuthorities(new HashSet<>(Set.of(this.roleRepository.findByAuthority("USER"))));
+        user.setAuthorities(new HashSet<Role>(Set.of(this.roleRepository.findByAuthority("USER"))));
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
