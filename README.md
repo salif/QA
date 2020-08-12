@@ -1,2 +1,2 @@
-# Question and answer site
+# Question and answer (Q&A) site
 
