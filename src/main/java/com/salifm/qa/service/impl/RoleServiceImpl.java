@@ -49,7 +49,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = this.roleRepository.findById(id).orElseThrow();
         RoleViewModel roleViewModel = new RoleViewModel();
         roleViewModel.setAuthority(this.roleRepository.findById(id).orElseThrow().getAuthority());
-        roleViewModel.setUsers(this.userRepository.findAll().stream()
+        roleViewModel.setUsers(this.userRepository.findAllByOrderByCreatedOn().stream()
                 .filter(u -> u.getAuthorities().contains(role))
                 .map(u -> this.modelMapper.map(u, UserPreviewViewModel.class))
                 .collect(Collectors.toList()));

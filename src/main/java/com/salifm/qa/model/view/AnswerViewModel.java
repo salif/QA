@@ -4,6 +4,7 @@ public class AnswerViewModel {
     private String authorName;
     private String authorId;
     private String text;
+    private String createdOn;
 
     public AnswerViewModel() {
     }
@@ -30,5 +31,13 @@ public class AnswerViewModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
     }
 }

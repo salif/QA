@@ -7,6 +7,8 @@ public class QuestionViewModel {
     private String authorName;
     private String authorId;
     private String answersCount;
+    private String createdOn;
+    private Integer views;
 
     public QuestionViewModel() {
     }
@@ -57,5 +59,21 @@ public class QuestionViewModel {
 
     public void setAnswersCount(String answersCount) {
         this.answersCount = answersCount;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
     }
 }

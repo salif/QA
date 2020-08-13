@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, String> {
-    List<Question> findAllByAuthorId(String id);
+    List<Question> findAllByOrderByCreatedOn();
+    List<Question> findAllByAuthorIdOrderByCreatedOn(String id);
 }

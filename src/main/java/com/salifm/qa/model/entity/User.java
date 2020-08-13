@@ -3,6 +3,7 @@ package com.salifm.qa.model.entity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,7 @@ public class User extends BaseEntity implements UserDetails {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
+    private LocalDateTime createdOn;
 
     public User() {
     }
@@ -101,5 +103,14 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Column(name = "created_on", nullable = false)
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 }

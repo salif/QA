@@ -7,6 +7,7 @@ public class ProfileViewModel {
     private List<RolesViewModel> roles;
     private List<QuestionPreviewViewModel> questions;
     private List<QuestionPreviewViewModel> answeredQuestions;
+    private String createdOn;
 
     public ProfileViewModel() {
     }
@@ -41,5 +42,13 @@ public class ProfileViewModel {
 
     public void setAnsweredQuestions(List<QuestionPreviewViewModel> answeredQuestions) {
         this.answeredQuestions = answeredQuestions;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.format.DateTimeFormatter;
+
 @Configuration
 public class AppBeanConfig {
 
@@ -17,5 +19,10 @@ public class AppBeanConfig {
     @Bean
     public PasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DateTimeFormatter dateTimeFormatter() {
+        return DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
     }
 }

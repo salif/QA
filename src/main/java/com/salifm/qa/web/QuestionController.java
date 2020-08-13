@@ -34,6 +34,7 @@ public class QuestionController {
 
     @GetMapping("/question/{id}")
     public ModelAndView getQuestionPage(Model model, ModelAndView modelAndView, @PathVariable("id") String id) {
+        this.questionService.incViews(id);
         QuestionViewModel question = this.questionService.getQuestion(id);
         List<AnswerViewModel> answers = this.answerService.getAnswers(id);
         question.setAnswersCount(String.valueOf(answers.size()));

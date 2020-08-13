@@ -20,6 +20,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,15 +35,17 @@ public class UserServiceImpl implements UserService {
     private final AnswerRepository answerRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+    private final DateTimeFormatter dateTimeFormatter;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, QuestionRepository questionRepository, AnswerRepository answerRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, QuestionRepository questionRepository, AnswerRepository answerRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, DateTimeFormatter dateTimeFormatter) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
@@ -71,6 +75,7 @@ public class UserServiceImpl implements UserService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
+        user.setCreatedOn(LocalDateTime.now());
         this.userRepository.saveAndFlush(user);
     }
 
@@ -94,15 +99,16 @@ public class UserServiceImpl implements UserService {
                 .map(role -> this.modelMapper.map(role, RolesViewModel.class))
                 .collect(Collectors.toList()));
 
-        profileViewModel.setQuestions(this.questionRepository.findAllByAuthorId(id).stream()
+        profileViewModel.setQuestions(this.questionRepository.findAllByAuthorIdOrderByCreatedOn(id).stream()
                 .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
                 .collect(Collectors.toList()));
 
-        profileViewModel.setAnsweredQuestions(this.answerRepository.findAllByAuthorId(id).stream()
+        profileViewModel.setAnsweredQuestions(this.answerRepository.findAllByAuthorIdOrderByCreatedOn(id).stream()
                 .map(Answer::getQuestion)
                 .distinct()
                 .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
                 .collect(Collectors.toList()));
+        profileViewModel.setCreatedOn(user.getCreatedOn().format(dateTimeFormatter));
 
         return profileViewModel;
     }

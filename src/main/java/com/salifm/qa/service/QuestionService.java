@@ -10,4 +10,6 @@ public interface QuestionService {
     List<QuestionPreviewViewModel> getAllQuestions();
     QuestionViewModel getQuestion(String id);
     String postQuestion(String title, String text, String authorUsername);
+
+    void incViews(String id);
 }
