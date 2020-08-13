@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProfileViewModel {
     private String username;
-    private List<String> roles;
+    private List<RolesViewModel> roles;
     private List<QuestionPreviewViewModel> questions;
     private List<QuestionPreviewViewModel> answeredQuestions;
 
@@ -19,11 +19,11 @@ public class ProfileViewModel {
         this.username = username;
     }
 
-    public List<String> getRoles() {
+    public List<RolesViewModel> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<RolesViewModel> roles) {
         this.roles = roles;
     }
 

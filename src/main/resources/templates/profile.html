@@ -17,7 +17,7 @@
         <div class="card-header">Roles</div>
         <div class="card-body">
             <th:block th:each="role : ${user.roles}">
-                <a class="btn btn-primary btn-sm" th:text="${role}" th:href="@{'/role/' + ${role} + '/'}"></a>&nbsp;
+                <a class="btn btn-primary btn-sm" th:text="${role.authority}" th:href="@{'/role/' + ${role.id} + '/'}"></a>&nbsp;
             </th:block>
         </div>
     </div>

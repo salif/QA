@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title th:text="|Role ${role.authority}|"></title>
+    <th:block th:replace="fragments/head :: bootstrap"></th:block>
+</head>
+<body>
+<main class="container">
+    <div th:replace="fragments/navbar :: logged"></div>
+    <h3 class="pb-2 mt-4 mb-2 border-bottom">
+        <th:block th:text="|Users with role ${role.authority}|"></th:block>
+    </h3>
+    <div class="list-group mb-5">
+        <a th:each="u : ${role.users}" th:href="@{'/profile/' + ${u.id} + '/'}" class="list-group-item list-group-item-action">
+            <span th:text="${u.username}"></span>
+        </a>
+    </div>
+</main>
+</body>
+</html>

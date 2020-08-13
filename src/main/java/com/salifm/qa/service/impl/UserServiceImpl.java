@@ -7,6 +7,7 @@ import com.salifm.qa.model.entity.Role;
 import com.salifm.qa.model.entity.User;
 import com.salifm.qa.model.view.ProfileViewModel;
 import com.salifm.qa.model.view.QuestionPreviewViewModel;
+import com.salifm.qa.model.view.RolesViewModel;
 import com.salifm.qa.repository.AnswerRepository;
 import com.salifm.qa.repository.QuestionRepository;
 import com.salifm.qa.repository.RoleRepository;
@@ -90,7 +91,8 @@ public class UserServiceImpl implements UserService {
         profileViewModel.setUsername(user.getUsername());
 
         profileViewModel.setRoles(user.getAuthorities().stream()
-                .map(Role::getAuthority).collect(Collectors.toList()));
+                .map(role -> this.modelMapper.map(role, RolesViewModel.class))
+                .collect(Collectors.toList()));
 
         profileViewModel.setQuestions(this.questionRepository.findAllByAuthorId(id).stream()
                 .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
