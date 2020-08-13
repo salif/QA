@@ -9,5 +9,5 @@ public interface QuestionService {
     void initQuestions();
     List<QuestionPreviewViewModel> getAllQuestions();
     QuestionViewModel getQuestion(String id);
-    String postQuestion(String title, String text, String author);
+    String postQuestion(String title, String text, String authorUsername);
 }

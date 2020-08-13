@@ -72,7 +72,7 @@ public class QuestionServiceImpl implements QuestionService {
         Question question = new Question();
         question.setTitle(title);
         question.setText(text);
-        question.setAuthor(this.userRepository.findByUsername(authorUsername).orElse(new User()));
+        question.setAuthor(this.userRepository.findByUsername(authorUsername).orElseThrow());
         this.questionRepository.saveAndFlush(question);
         return String.valueOf(question.getId());
     }

@@ -12,7 +12,7 @@
     <h3 class="pb-2 mt-4 mb-2 border-bottom">
         Questions
     </h3>
-    <div class="list-group">
+    <div class="list-group mb-5">
         <a th:each="q : ${questions}" th:href="@{'/question/' + ${q.id} + '/'}" class="list-group-item list-group-item-action">
             <span th:text="${q.title}"></span>
         </a>

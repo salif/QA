@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AnswerService {
     List<AnswerViewModel> getAnswers(String questionId);
+    void postAnswer(String questionId, String text, String authorUsername);
 }
