@@ -25,7 +25,7 @@ public class RegisterController {
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String getRegisterPage(Model model) {
         if(!model.containsAttribute("userRegisterBindingModel")){
             model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
         }
@@ -33,7 +33,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String registerConfirm(@Valid
+    public String register(@Valid
                                   @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes){
 

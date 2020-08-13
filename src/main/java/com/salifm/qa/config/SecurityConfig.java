@@ -36,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 csrf().disable().
                 authorizeRequests().
-                antMatchers("/login", "/register", "/").permitAll().
-                antMatchers("/questions/*").authenticated().
+                antMatchers("/login", "/register", "/", "/webjars/**").permitAll().
+                anyRequest().authenticated().
                 and().formLogin().
                     loginPage("/login").
                     usernameParameter("username").

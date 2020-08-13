@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Ask question</title>
+    <th:block th:replace="fragments/head :: bootstrap"></th:block>
+</head>
+<body>
+<main class="container">
+    <div th:replace="fragments/navbar :: logged"></div>
+    <div class="mt-5">
+        <form th:method="POST" th:action="@{/questions/new}" th:object="${questionAskBindingModel}">
+            <div th:each="err : ${#fields.errors()}" th:text="${err}" class="alert alert-danger" role="alert">
+                error
+            </div>
+            <div class="form-group">
+                <label for="inputTitle">Title</label>
+                <input type="text" class="form-control" id="inputTitle" name="title" th:field="*{title}" />
+            </div>
+            <div class="form-group">
+                <label for="inputText">Text</label>
+                <textarea class="form-control" rows="10" id="inputText" name="text" th:field="*{text}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">submit</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

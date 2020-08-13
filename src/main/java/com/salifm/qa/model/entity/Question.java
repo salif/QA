@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Question extends BaseEntity {
     private User author;
     private String title;
-    private String description;
+    private String text;
 
     public Question() {
     }
@@ -33,12 +33,12 @@ public class Question extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "description", nullable = false)
-    public String getDescription() {
-        return description;
+    @Column(name = "text", nullable = false, columnDefinition = "TEXT")
+    public String getText() {
+        return text;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setText(String text) {
+        this.text = text;
     }
 }

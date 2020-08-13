@@ -5,6 +5,7 @@ import com.salifm.qa.constants.Users;
 import com.salifm.qa.model.entity.Answer;
 import com.salifm.qa.model.entity.Question;
 import com.salifm.qa.model.entity.User;
+import com.salifm.qa.model.view.QuestionPreviewViewModel;
 import com.salifm.qa.model.view.QuestionViewModel;
 import com.salifm.qa.repository.AnswerRepository;
 import com.salifm.qa.repository.QuestionRepository;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
             User admin = this.userRepository.findByUsername(Users.ADMIN_USERNAME).orElse(null);
             question.setAuthor(admin);
             question.setTitle(Questions.QUESTION_TITLE);
-            question.setDescription(Questions.QUESTION_DESCRIPTION);
+            question.setText(Questions.QUESTION_TEXT);
             Answer answer = new Answer();
             answer.setAuthor(admin);
             answer.setQuestion(question);
@@ -52,17 +52,28 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionViewModel> getAllQuestions() {
+    public List<QuestionPreviewViewModel> getAllQuestions() {
         return this.questionRepository.findAll().stream()
-                .map(question -> {
-                    QuestionViewModel questionViewModel = this.modelMapper.map(question, QuestionViewModel.class);
-                    return questionViewModel;
-                })
+                .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Question> getQuestion(String id) {
-        return this.questionRepository.findById(id);
+    public QuestionViewModel getQuestion(String id) {
+        Question question = this.questionRepository.findById(id).orElse(new Question());
+        QuestionViewModel questionViewModel = this.modelMapper.map(question, QuestionViewModel.class);
+        questionViewModel.setAuthorName(question.getAuthor().getUsername());
+        questionViewModel.setAuthorId(question.getAuthor().getId());
+        return questionViewModel;
+    }
+
+    @Override
+    public String postQuestion(String title, String text, String authorUsername) {
+        Question question = new Question();
+        question.setTitle(title);
+        question.setText(text);
+        question.setAuthor(this.userRepository.findByUsername(authorUsername).orElse(new User()));
+        this.questionRepository.saveAndFlush(question);
+        return String.valueOf(question.getId());
     }
 }
