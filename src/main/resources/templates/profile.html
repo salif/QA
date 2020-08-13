@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title th:text="${user.username}"></title>
+    <th:block th:replace="fragments/head :: bootstrap"></th:block>
+</head>
+<body>
+<main class="container">
+    <div th:replace="fragments/navbar :: logged"></div>
+    <div class="card mt-5">
+        <div class="card-header">Username</div>
+        <div class="card-body" th:text="${user.username}"></div>
+    </div>
+    <div class="card mt-5">
+        <div class="card-header">Roles</div>
+        <div class="card-body">
+            <th:block th:each="role : ${user.roles}">
+                <a class="btn btn-primary btn-sm" th:text="${role}" th:href="@{'/role/' + ${role} + '/'}"></a>&nbsp;
+            </th:block>
+        </div>
+    </div>
+    <div class="card mt-5">
+        <div class="card-header">Questions</div>
+        <div class="card-body">
+            <div class="list-group">
+                <a th:each="q : ${user.questions}" th:href="@{'/question/' + ${q.id} + '/'}"
+                   class="list-group-item list-group-item-action">
+                    <span th:text="${q.title}"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-5 mb-5">
+        <div class="card-header">Answered Questions</div>
+        <div class="card-body">
+            <div class="list-group">
+                <a th:each="q : ${user.answeredQuestions}" th:href="@{'/question/' + ${q.id} + '/'}"
+                   class="list-group-item list-group-item-action">
+                    <span th:text="${q.title}"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

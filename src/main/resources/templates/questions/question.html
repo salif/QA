@@ -28,7 +28,7 @@
                   th:field="*{text}"></textarea>
         <button type="submit" class="btn btn-primary">answer</button>
     </form>
-    <div class="mt-3 mb-5">
+    <div class="mt-5 mb-5">
         <div class="mt-3 mr-5 card" th:each="a : ${answers}">
             <div class="card-header small">
                 <a th:text="${a.authorName}" th:href="@{'/profile/' + ${a.authorId} + '/'}"></a>

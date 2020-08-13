@@ -2,11 +2,17 @@ package com.salifm.qa.service.impl;
 
 import com.salifm.qa.constants.Roles;
 import com.salifm.qa.constants.Users;
+import com.salifm.qa.model.entity.Answer;
 import com.salifm.qa.model.entity.Role;
 import com.salifm.qa.model.entity.User;
+import com.salifm.qa.model.view.ProfileViewModel;
+import com.salifm.qa.model.view.QuestionPreviewViewModel;
+import com.salifm.qa.repository.AnswerRepository;
+import com.salifm.qa.repository.QuestionRepository;
 import com.salifm.qa.repository.RoleRepository;
 import com.salifm.qa.repository.UserRepository;
 import com.salifm.qa.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,19 +21,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, QuestionRepository questionRepository, AnswerRepository answerRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
         this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -63,5 +76,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean exists(String username) {
         return this.userRepository.findByUsername(username).isPresent();
+    }
+
+    @Override
+    public String getUserId(String username) {
+        return this.userRepository.findByUsername(username).orElseThrow().getId();
+    }
+
+    @Override
+    public ProfileViewModel getProfile(String id) {
+        User user = this.userRepository.findById(id).orElseThrow();
+        ProfileViewModel profileViewModel = new ProfileViewModel();
+        profileViewModel.setUsername(user.getUsername());
+
+        profileViewModel.setRoles(user.getAuthorities().stream()
+                .map(Role::getAuthority).collect(Collectors.toList()));
+
+        profileViewModel.setQuestions(this.questionRepository.findAllByAuthorId(id).stream()
+                .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
+                .collect(Collectors.toList()));
+
+        profileViewModel.setAnsweredQuestions(this.answerRepository.findAllByAuthorId(id).stream()
+                .map(Answer::getQuestion)
+                .distinct()
+                .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
+                .collect(Collectors.toList()));
+
+        return profileViewModel;
     }
 }

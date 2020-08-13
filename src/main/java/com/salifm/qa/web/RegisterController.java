@@ -42,8 +42,12 @@ public class RegisterController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
             return "redirect:/register";
         }
+        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+            bindingResult.addError(new ObjectError("username", "Passwords does not match!"));
+            return "register";
+        }
         if (this.userService.exists(userRegisterBindingModel.getUsername())) {
-            bindingResult.addError(new ObjectError("username", "An account with this username already exists."));
+            bindingResult.addError(new ObjectError("password", "An account with this username already exists."));
             return "register";
         }
         this.userService.register(userRegisterBindingModel.getUsername(), userRegisterBindingModel.getPassword());
