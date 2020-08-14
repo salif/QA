@@ -1,0 +1,5 @@
+{
+  "name": "QA",
+  "description": "Question and answer site",
+  "addons": [ "heroku-postgresql" ]
+}
