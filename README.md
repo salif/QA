@@ -6,16 +6,24 @@ username: `admin`
 
 password: `password`
 
+## Demo
+
+[q-a-site.herokuapp.com](https://q-a-site.herokuapp.com/)
+
 ### Demo screenshots
 
-![](./.github/localhost_8080_register.png)
+![](./.github/register.png)
 ---
-![](./.github/localhost_8080_login.png)
+![](./.github/login.png)
 ---
-![](./.github/localhost_8080_questions.png)
+![](./.github/questions.png)
 ---
-![](./.github/localhost_8080_questions_new.png)
+![](./.github/questions_new.png)
 ---
-![](./.github/localhost_8080_question.png)
+![](./.github/question.png)
 ---
-![](./.github/localhost_8080_profile.png)
+![](./.github/profile.png)
+---
+![](./.github/roles.png)
+---
+![](./.github/role.png)
