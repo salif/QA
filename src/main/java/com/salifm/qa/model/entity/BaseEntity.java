@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.entity;
 
 import org.hibernate.annotations.GenericGenerator;

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.view;
 
 public class AnswerViewModel {
@@ -5,6 +8,7 @@ public class AnswerViewModel {
     private String authorId;
     private String text;
     private String createdOn;
+    private boolean edited;
 
     public AnswerViewModel() {
     }
@@ -39,5 +43,13 @@ public class AnswerViewModel {
 
     public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 }

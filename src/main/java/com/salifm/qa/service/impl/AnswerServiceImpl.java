@@ -1,6 +1,10 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.service.impl;
 
 import com.salifm.qa.model.entity.Answer;
+import com.salifm.qa.model.entity.Question;
 import com.salifm.qa.model.view.AnswerViewModel;
 import com.salifm.qa.repository.AnswerRepository;
 import com.salifm.qa.repository.QuestionRepository;
@@ -25,7 +29,9 @@ public class AnswerServiceImpl implements AnswerService {
     private final DateTimeFormatter dateTimeFormatter;
 
     @Autowired
-    public AnswerServiceImpl(AnswerRepository answerRepository, QuestionRepository questionRepository, UserRepository userRepository, ModelMapper modelMapper, DateTimeFormatter dateTimeFormatter) {
+    public AnswerServiceImpl(AnswerRepository answerRepository, QuestionRepository questionRepository,
+                             UserRepository userRepository, ModelMapper modelMapper,
+                             DateTimeFormatter dateTimeFormatter) {
         this.answerRepository = answerRepository;
         this.questionRepository = questionRepository;
         this.userRepository = userRepository;
@@ -49,10 +55,10 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void postAnswer(String questionId, String text, String authorUsername) {
         Answer answer = new Answer();
-        answer.setQuestion(this.questionRepository.findById(questionId).orElseThrow());
-        answer.setText(text);
-        answer.setAuthor(this.userRepository.findByUsername(authorUsername).orElseThrow());
-        answer.setCreatedOn(LocalDateTime.now());
+        Question question = this.questionRepository.findById(questionId).orElseThrow();
+        answer.set(this.userRepository.findByUsername(authorUsername).orElseThrow(),
+                question, text, LocalDateTime.now());
+        question.setAnswerCount(question.getAnswerCount() + 1);
         this.answerRepository.saveAndFlush(answer);
     }
 }

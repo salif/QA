@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.view;
 
 public class QuestionViewModel {
@@ -6,9 +9,10 @@ public class QuestionViewModel {
     private String text;
     private String authorName;
     private String authorId;
-    private String answersCount;
     private String createdOn;
     private Integer views;
+    private Integer answerCount;
+    private boolean edited;
 
     public QuestionViewModel() {
     }
@@ -53,14 +57,6 @@ public class QuestionViewModel {
         this.authorId = authorId;
     }
 
-    public String getAnswersCount() {
-        return answersCount;
-    }
-
-    public void setAnswersCount(String answersCount) {
-        this.answersCount = answersCount;
-    }
-
     public String getCreatedOn() {
         return createdOn;
     }
@@ -75,5 +71,21 @@ public class QuestionViewModel {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public Integer getAnswerCount() {
+        return answerCount;
+    }
+
+    public void setAnswerCount(Integer answerCount) {
+        this.answerCount = answerCount;
+    }
+
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 }

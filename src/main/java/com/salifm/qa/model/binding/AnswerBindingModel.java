@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.binding;
 
 import org.hibernate.validator.constraints.Length;
@@ -14,6 +17,6 @@ public class AnswerBindingModel {
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.text = text.strip();
     }
 }

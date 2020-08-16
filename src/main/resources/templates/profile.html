@@ -13,7 +13,7 @@
         <div class="card-header">Username</div>
         <div class="card-body" th:text="${user.username}"></div>
     </div>
-    <div class="card mt-5">
+    <div class="card mt-2">
         <div class="card-header">Roles</div>
         <div class="card-body">
             <th:block th:each="role : ${user.roles}">
@@ -21,11 +21,15 @@
             </th:block>
         </div>
     </div>
-    <div class="card mt-5">
+    <div class="card mt-2">
         <div class="card-header">Joined</div>
         <div class="card-body" th:text="${user.createdOn}"></div>
     </div>
-    <div class="card mt-5">
+    <div class="card mt-2">
+        <div class="card-header">Bio</div>
+        <div class="card-body" th:text="${user.bio}"></div>
+    </div>
+    <div class="card mt-2">
         <div class="card-header">Questions</div>
         <div class="card-body">
             <div class="list-group">
@@ -36,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="card mt-5 mb-5">
+    <div class="card mt-2 mb-5">
         <div class="card-header">Answered Questions</div>
         <div class="card-body">
             <div class="list-group">

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.service.impl;
 
 import com.salifm.qa.constants.Questions;
@@ -30,7 +33,9 @@ public class QuestionServiceImpl implements QuestionService {
     private final DateTimeFormatter dateTimeFormatter;
 
     @Autowired
-    public QuestionServiceImpl(QuestionRepository questionRepository, AnswerRepository answerRepository, UserRepository userRepository, ModelMapper modelMapper, DateTimeFormatter dateTimeFormatter) {
+    public QuestionServiceImpl(QuestionRepository questionRepository, AnswerRepository answerRepository,
+                               UserRepository userRepository, ModelMapper modelMapper,
+                               DateTimeFormatter dateTimeFormatter) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.userRepository = userRepository;
@@ -41,18 +46,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void initQuestions() {
         if(this.questionRepository.count() == 0 && this.answerRepository.count() == 0) {
+            User admin = this.userRepository.findByUsername(Users.ADMIN_USERNAME).orElseThrow();
             Question question = new Question();
-            User admin = this.userRepository.findByUsername(Users.ADMIN_USERNAME).orElse(null);
-            question.setAuthor(admin);
-            question.setTitle(Questions.QUESTION_TITLE);
-            question.setText(Questions.QUESTION_TEXT);
-            question.setCreatedOn(LocalDateTime.now());
-            question.setViews(0);
+            question.set(admin, Questions.QUESTION_TITLE, Questions.QUESTION_TEXT, LocalDateTime.now());
             Answer answer = new Answer();
-            answer.setAuthor(admin);
-            answer.setQuestion(question);
-            answer.setText(Questions.ANSWER);
-            answer.setCreatedOn(LocalDateTime.now());
+            answer.set(admin, question, Questions.ANSWER, LocalDateTime.now());
             this.questionRepository.saveAndFlush(question);
             this.answerRepository.saveAndFlush(answer);
         }
@@ -67,7 +65,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionViewModel getQuestion(String id) {
-        Question question = this.questionRepository.findById(id).orElse(new Question());
+        Question question = this.questionRepository.findById(id).orElseThrow();
         QuestionViewModel questionViewModel = this.modelMapper.map(question, QuestionViewModel.class);
         questionViewModel.setAuthorName(question.getAuthor().getUsername());
         questionViewModel.setAuthorId(question.getAuthor().getId());

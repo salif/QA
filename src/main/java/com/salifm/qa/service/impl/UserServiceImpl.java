@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.service.impl;
 
 import com.salifm.qa.constants.Roles;
@@ -5,7 +8,7 @@ import com.salifm.qa.constants.Users;
 import com.salifm.qa.model.entity.Answer;
 import com.salifm.qa.model.entity.Role;
 import com.salifm.qa.model.entity.User;
-import com.salifm.qa.model.view.ProfileViewModel;
+import com.salifm.qa.model.view.UserViewModel;
 import com.salifm.qa.model.view.QuestionPreviewViewModel;
 import com.salifm.qa.model.view.RolesViewModel;
 import com.salifm.qa.repository.AnswerRepository;
@@ -38,7 +41,10 @@ public class UserServiceImpl implements UserService {
     private final DateTimeFormatter dateTimeFormatter;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, QuestionRepository questionRepository, AnswerRepository answerRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, DateTimeFormatter dateTimeFormatter) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
+                           QuestionRepository questionRepository, AnswerRepository answerRepository,
+                           PasswordEncoder passwordEncoder, ModelMapper modelMapper,
+                           DateTimeFormatter dateTimeFormatter) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.questionRepository = questionRepository;
@@ -50,32 +56,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        return this.userRepository.findByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("Username not found!"));
     }
 
     @Override
     public void initUsers() {
         if(this.userRepository.count() == 0){
-            register(Users.ADMIN_USERNAME, Users.ADMIN_PASSWORD);
-            if (this.userRepository.findByUsername(Users.ADMIN_USERNAME).isPresent()) {
-                User admin = this.userRepository.findByUsername(Users.ADMIN_USERNAME).get();
-                admin.addAuthority(this.roleRepository.findByAuthority(Roles.ADMIN));
+                User admin = new User();
+                admin.set(Users.ADMIN_USERNAME,
+                        this.passwordEncoder.encode(Users.ADMIN_PASSWORD),
+                        new HashSet<Role>(
+                                Set.of(
+                                        this.roleRepository.findByAuthority(Roles.USER),
+                                        this.roleRepository.findByAuthority(Roles.ADMIN))),
+                        LocalDateTime.now());
                 this.userRepository.saveAndFlush(admin);
-            }
         }
     }
 
     @Override
     public void register(String username, String password) {
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(this.passwordEncoder.encode(password));
-        user.setAuthorities(new HashSet<Role>(Set.of(this.roleRepository.findByAuthority(Roles.USER))));
-        user.setAccountNonExpired(true);
-        user.setAccountNonLocked(true);
-        user.setCredentialsNonExpired(true);
-        user.setEnabled(true);
-        user.setCreatedOn(LocalDateTime.now());
+        user.set(username,
+                this.passwordEncoder.encode(password),
+                new HashSet<Role>(Set.of(this.roleRepository.findByAuthority(Roles.USER))),
+                LocalDateTime.now());
         this.userRepository.saveAndFlush(user);
     }
 
@@ -90,26 +96,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ProfileViewModel getProfile(String id) {
+    public UserViewModel getProfile(String id) {
         User user = this.userRepository.findById(id).orElseThrow();
-        ProfileViewModel profileViewModel = new ProfileViewModel();
-        profileViewModel.setUsername(user.getUsername());
+        UserViewModel userViewModel = new UserViewModel();
+        userViewModel.setUsername(user.getUsername());
 
-        profileViewModel.setRoles(user.getAuthorities().stream()
+        userViewModel.setRoles(user.getAuthorities().stream()
                 .map(role -> this.modelMapper.map(role, RolesViewModel.class))
                 .collect(Collectors.toList()));
 
-        profileViewModel.setQuestions(this.questionRepository.findAllByAuthorIdOrderByCreatedOn(id).stream()
+        userViewModel.setQuestions(this.questionRepository.findAllByAuthorIdOrderByCreatedOn(id).stream()
                 .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
                 .collect(Collectors.toList()));
 
-        profileViewModel.setAnsweredQuestions(this.answerRepository.findAllByAuthorIdOrderByCreatedOn(id).stream()
+        userViewModel.setAnsweredQuestions(this.answerRepository.findAllByAuthorIdOrderByCreatedOn(id).stream()
                 .map(Answer::getQuestion)
                 .distinct()
                 .map(question -> this.modelMapper.map(question, QuestionPreviewViewModel.class))
                 .collect(Collectors.toList()));
-        profileViewModel.setCreatedOn(user.getCreatedOn().format(dateTimeFormatter));
+        userViewModel.setCreatedOn(user.getCreatedOn().format(dateTimeFormatter));
 
-        return profileViewModel;
+        return userViewModel;
     }
 }

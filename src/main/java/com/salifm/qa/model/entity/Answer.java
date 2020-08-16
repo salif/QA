@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.entity;
 
 import javax.persistence.Column;
@@ -13,8 +16,17 @@ public class Answer extends BaseEntity {
     private Question question;
     private String text;
     private LocalDateTime createdOn;
+    private boolean edited;
 
     public Answer() {
+        this.edited = false;
+    }
+
+    public void set(User author, Question question, String text, LocalDateTime createdOn) {
+        this.setAuthor(author);
+        this.setQuestion(question);
+        this.setText(text);
+        this.setCreatedOn(createdOn);
     }
 
     @ManyToOne
@@ -51,5 +63,14 @@ public class Answer extends BaseEntity {
 
     public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
+    }
+
+    @Column(name = "edited", nullable = false)
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 }

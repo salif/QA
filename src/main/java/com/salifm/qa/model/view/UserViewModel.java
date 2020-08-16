@@ -1,15 +1,19 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.view;
 
 import java.util.List;
 
-public class ProfileViewModel {
+public class UserViewModel {
     private String username;
+    private String bio;
     private List<RolesViewModel> roles;
     private List<QuestionPreviewViewModel> questions;
     private List<QuestionPreviewViewModel> answeredQuestions;
     private String createdOn;
 
-    public ProfileViewModel() {
+    public UserViewModel() {
     }
 
     public String getUsername() {
@@ -18,6 +22,14 @@ public class ProfileViewModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public List<RolesViewModel> getRoles() {

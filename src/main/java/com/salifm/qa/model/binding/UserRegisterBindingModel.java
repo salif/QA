@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.binding;
 
 import org.hibernate.validator.constraints.Length;
@@ -20,7 +23,7 @@ public class UserRegisterBindingModel {
         this.username = username;
     }
 
-    @Length(min = 3, max = 40, message = "Password length must be between 3 and 40 characters!")
+    @Length(min = 3, max = 128, message = "Password length must be between 3 and 40 characters!")
     public String getPassword() {
         return password;
     }

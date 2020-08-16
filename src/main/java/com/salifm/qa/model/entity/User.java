@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.entity;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +14,49 @@ import java.util.Set;
 public class User extends BaseEntity implements UserDetails {
     private String username;
     private String password;
+    private String bio;
     private Set<Role> authorities;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
     private LocalDateTime createdOn;
+    private boolean premium;
 
     public User() {
+        this.bio = "";
+        this.premium = false;
+    }
+
+    public void set(String username, String password,
+                Set<Role> authorities, LocalDateTime createdOn) {
+        this.setUsername(username);
+        this.setPassword(password);
+        this.setAuthorities(authorities);
+        this.setCreatedOn(createdOn);
+    }
+
+    @Column(name="username", nullable = false, unique = true)
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Column(name="password", nullable = false)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(name="bio", nullable = false)
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     @Override
@@ -47,58 +85,28 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities.add(role);
     }
 
-    @Column(name="username", nullable = false, unique = true)
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Column(name="password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
+    @Transient
     public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
+        return true;
     }
 
     @Override
+    @Transient
     public boolean isAccountNonLocked() {
-        return this.accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
+        return true;
     }
 
     @Override
+    @Transient
     public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
+        return true;
     }
 
     @Override
+    @Transient
     public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        return true;
     }
 
     @Column(name = "created_on", nullable = false)
@@ -108,5 +116,14 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
+    }
+
+    @Column(name = "premium", nullable = false)
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
     }
 }

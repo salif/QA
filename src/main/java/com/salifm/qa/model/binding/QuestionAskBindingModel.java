@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.binding;
 
 import org.hibernate.validator.constraints.Length;
@@ -16,7 +19,7 @@ public class QuestionAskBindingModel {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title.strip();
     }
 
     @Length(max = 50000, message = "Text length must be between 0 and 50000 characters!")
@@ -25,6 +28,6 @@ public class QuestionAskBindingModel {
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.text = text.strip();
     }
 }

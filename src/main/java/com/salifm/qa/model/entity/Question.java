@@ -1,9 +1,9 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,8 +14,20 @@ public class Question extends BaseEntity {
     private String text;
     private LocalDateTime createdOn;
     private Integer views;
+    private Integer answerCount;
+    private boolean edited;
 
     public Question() {
+        this.views = 0;
+        this.answerCount = 0;
+        this.edited = false;
+    }
+
+    public void set(User author, String title, String text, LocalDateTime createdOn) {
+        this.setAuthor(author);
+        this.setTitle(title);
+        this.setText(text);
+        this.setCreatedOn(createdOn);
     }
 
     @ManyToOne
@@ -61,5 +73,23 @@ public class Question extends BaseEntity {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    @Column(name = "answer_count", nullable = false)
+    public Integer getAnswerCount() {
+        return answerCount;
+    }
+
+    public void setAnswerCount(Integer answerCount) {
+        this.answerCount = answerCount;
+    }
+
+    @Column(name = "edited", nullable = false)
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 }

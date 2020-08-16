@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.service.impl;
 
 import com.salifm.qa.constants.Roles;
@@ -33,7 +36,10 @@ public class RoleServiceImpl implements RoleService {
     public void initRoles() {
         if(this.roleRepository.count() == 0){
             this.roleRepository.saveAndFlush(new Role(Roles.ADMIN));
+            this.roleRepository.saveAndFlush(new Role(Roles.SUPER_MOD));
+            this.roleRepository.saveAndFlush(new Role(Roles.MOD));
             this.roleRepository.saveAndFlush(new Role(Roles.USER));
+            this.roleRepository.saveAndFlush(new Role(Roles.TRANSLATOR));
         }
     }
 

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-License-Identifier: MIT
+
 package com.salifm.qa.web;
 
 import com.salifm.qa.model.binding.AnswerBindingModel;
@@ -37,7 +40,6 @@ public class QuestionController {
         this.questionService.incViews(id);
         QuestionViewModel question = this.questionService.getQuestion(id);
         List<AnswerViewModel> answers = this.answerService.getAnswers(id);
-        question.setAnswersCount(String.valueOf(answers.size()));
         modelAndView.addObject("question", question);
         modelAndView.addObject("answers", answers);
         if(!model.containsAttribute("answerBindingModel")){
