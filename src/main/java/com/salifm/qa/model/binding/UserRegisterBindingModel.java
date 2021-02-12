@@ -1,7 +1,7 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.model.binding;
+package eu.salif.qa.model.binding;
 
 import org.hibernate.validator.constraints.Length;
 

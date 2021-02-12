@@ -1,21 +1,21 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.service.impl;
+package eu.salif.qa.service.impl;
 
-import com.salifm.qa.constants.Roles;
-import com.salifm.qa.constants.Users;
-import com.salifm.qa.model.entity.Answer;
-import com.salifm.qa.model.entity.Role;
-import com.salifm.qa.model.entity.User;
-import com.salifm.qa.model.view.UserViewModel;
-import com.salifm.qa.model.view.QuestionPreviewViewModel;
-import com.salifm.qa.model.view.RolesViewModel;
-import com.salifm.qa.repository.AnswerRepository;
-import com.salifm.qa.repository.QuestionRepository;
-import com.salifm.qa.repository.RoleRepository;
-import com.salifm.qa.repository.UserRepository;
-import com.salifm.qa.service.UserService;
+import eu.salif.qa.constants.Roles;
+import eu.salif.qa.constants.Users;
+import eu.salif.qa.model.entity.Answer;
+import eu.salif.qa.model.entity.Role;
+import eu.salif.qa.model.entity.User;
+import eu.salif.qa.model.view.UserViewModel;
+import eu.salif.qa.model.view.QuestionPreviewViewModel;
+import eu.salif.qa.model.view.RolesViewModel;
+import eu.salif.qa.repository.AnswerRepository;
+import eu.salif.qa.repository.QuestionRepository;
+import eu.salif.qa.repository.RoleRepository;
+import eu.salif.qa.repository.UserRepository;
+import eu.salif.qa.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

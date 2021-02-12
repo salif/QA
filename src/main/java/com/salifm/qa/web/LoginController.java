@@ -1,7 +1,7 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.web;
+package eu.salif.qa.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

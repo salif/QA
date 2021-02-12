@@ -1,10 +1,10 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.service;
+package eu.salif.qa.service;
 
-import com.salifm.qa.model.view.RoleViewModel;
-import com.salifm.qa.model.view.RolesViewModel;
+import eu.salif.qa.model.view.RoleViewModel;
+import eu.salif.qa.model.view.RolesViewModel;
 
 import java.util.List;
 

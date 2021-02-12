@@ -1,19 +1,19 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.service.impl;
+package eu.salif.qa.service.impl;
 
-import com.salifm.qa.constants.Questions;
-import com.salifm.qa.constants.Users;
-import com.salifm.qa.model.entity.Answer;
-import com.salifm.qa.model.entity.Question;
-import com.salifm.qa.model.entity.User;
-import com.salifm.qa.model.view.QuestionPreviewViewModel;
-import com.salifm.qa.model.view.QuestionViewModel;
-import com.salifm.qa.repository.AnswerRepository;
-import com.salifm.qa.repository.QuestionRepository;
-import com.salifm.qa.repository.UserRepository;
-import com.salifm.qa.service.QuestionService;
+import eu.salif.qa.constants.Questions;
+import eu.salif.qa.constants.Users;
+import eu.salif.qa.model.entity.Answer;
+import eu.salif.qa.model.entity.Question;
+import eu.salif.qa.model.entity.User;
+import eu.salif.qa.model.view.QuestionPreviewViewModel;
+import eu.salif.qa.model.view.QuestionViewModel;
+import eu.salif.qa.repository.AnswerRepository;
+import eu.salif.qa.repository.QuestionRepository;
+import eu.salif.qa.repository.UserRepository;
+import eu.salif.qa.service.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

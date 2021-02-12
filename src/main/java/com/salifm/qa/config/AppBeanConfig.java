@@ -1,7 +1,7 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.config;
+package eu.salif.qa.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

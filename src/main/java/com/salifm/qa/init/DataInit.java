@@ -1,12 +1,12 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.init;
+package eu.salif.qa.init;
 
 
-import com.salifm.qa.service.QuestionService;
-import com.salifm.qa.service.RoleService;
-import com.salifm.qa.service.UserService;
+import eu.salif.qa.service.QuestionService;
+import eu.salif.qa.service.RoleService;
+import eu.salif.qa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

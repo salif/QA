@@ -1,7 +1,7 @@
-// SPDX-FileCopyrightText: 2020 Salif Mehmed <salifm@salifm.com>
+// SPDX-FileCopyrightText: 2020 Salif Mehmed <mail@salif.eu>
 // SPDX-License-Identifier: MIT
 
-package com.salifm.qa.model.entity;
+package eu.salif.qa.model.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 

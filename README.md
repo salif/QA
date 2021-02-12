@@ -1,11 +1,5 @@
 # Question and answer (Q&A) site
 
-### Default administrator user:
-
-username: `admin`
-
-password: `password`
-
 ## Demo
 
 [q-a-site.herokuapp.com](https://q-a-site.herokuapp.com/)
