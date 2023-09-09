@@ -6,18 +6,18 @@
 
 ### Demo screenshots
 
-![](./.github/register.png)
+![screenshot](./media/register.png)
 ---
-![](./.github/login.png)
+![screenshot](./media/login.png)
 ---
-![](./.github/questions.png)
+![screenshot](./media/questions.png)
 ---
-![](./.github/questions_new.png)
+![screenshot](./media/questions_new.png)
 ---
-![](./.github/question.png)
+![screenshot](./media/question.png)
 ---
-![](./.github/profile.png)
+![screenshot](./media/profile.png)
 ---
-![](./.github/roles.png)
+![screenshot](./media/roles.png)
 ---
-![](./.github/role.png)
+![screenshot](./media/role.png)
